@@ -11,22 +11,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Available tabs.
-$plugin_tabs = array( 'general', 'sync' );
+$plugin_tabs = array( 'general' );
 
 // Current tab.
 $plugin_tab = isset( $_GET['tab'] ) && in_array( $_GET['tab'], $plugin_tabs, true ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-$transient_key = 'klaviyo_wp_meta_sync_bulk_user_ids';
-            $user_ids = get_transient( $transient_key );
-			echo '<pre>';
-			var_dump($user_ids);
-			echo '</pre>';
 ?>
 
 <div class="klaviyo-wp-meta-sync" id="klaviyo-wp-meta-sync">
 	<nav class="nav-tab-wrapper nav-tab-wrapper">
 		<a href="admin.php?page=klaviyo-wp-meta-sync&tab=general" class="nav-tab <?php echo 'general' === $plugin_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Settings', 'klaviyo-wp-meta-sync' ); ?></a>
-		<a href="admin.php?page=klaviyo-wp-meta-sync&tab=sync" class="nav-tab <?php echo 'sync' === $plugin_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Sync', 'klaviyo-wp-meta-sync' ); ?></a>
 	</nav>
 
 	<div class="klaviyo-wp-meta-sync-inside-tabs">

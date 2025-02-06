@@ -32,6 +32,7 @@
               const {
                 total_users,
                 completed_users,
+                skipped_users,
                 failed_users,
                 remaining_users
               } = response.data;
@@ -40,6 +41,7 @@
               let progressMessage = `
 								<div style="font-size: 14px; line-height: 1.6; margin-bottom: 10px;">
 									<strong style="color: green;">${completed_users.length}</strong> out of <strong>${total_users}</strong> users synced successfully.<br>
+									<strong style="color: yellow;">${skipped_users.length}</strong> users skipped - No matching meta keys found.<br>
 									<strong style="color: red;">${failed_users.length}</strong> users failed.<br>
 									<strong style="color: orange;">${remaining_users}</strong> users are still in progress.
 								</div>
@@ -51,7 +53,7 @@
                 clearInterval(interval);
                 let finalMessage = `
 									<div style="margin-top: 10px; font-size: 14px; line-height: 1.6;">
-										<strong style="color: green;">All syncs completed successfully!</strong>
+										<strong style="color: green;">All sync completed successfully!</strong>
 										${failed_users.length > 0 ? `<br><strong style="color: red;">${failed_users.length} users failed. Check logs for details.</strong>` : ''}
 									</div>
 								`;

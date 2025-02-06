@@ -140,21 +140,16 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
                 if ( $status === 'processing' ) {
                     $sync_result = self::run_sync_per_user( $user_id, $user );
         
-                    if ( $sync_result ) {
-                        update_user_meta( $user_id, '_klaviyo_sync_status', 'completed' );
-                        $user_ids[ $user_id ] = 'completed';
-                    } else {
-                        update_user_meta( $user_id, '_klaviyo_sync_status', 'failed' );
-                        $user_ids[ $user_id ] = 'failed';
+                    if ( $sync_result && isset( $sync_result['status'] ) ) {
+                        update_user_meta( $user_id, '_klaviyo_sync_status', $sync_result['status'] );
+                        $user_ids[ $user_id ] = $sync_result['status'];
                     }
                 }
             }
         
             set_transient( $transient_key, $user_ids, HOUR_IN_SECONDS );
         }
-        
-
-
+    
         /**
          * Run sync per user.
          *
@@ -165,12 +160,13 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
          */
         public static function run_sync_per_user( $user_id, $user ) {
             $properties = [];
+            $sync_result = [];
 
             // Get all user meta for the user (faster than multiple calls to get_user_meta)
             $user_meta = get_metadata_raw( 'user', $user_id );
             $email = $user->user_email;
 ;
-            // Loop through each meta key in $this->meta_data
+            // Loop through each meta key in $this->meta_data.
             foreach ( self::$meta_data as $meta_key ) {
                 if ( array_key_exists( $meta_key, $user_meta ) ) {
                     $meta_value = get_user_meta( $user_id, $meta_key, true );
@@ -180,23 +176,27 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
                 }
             }
 
-            // If no matching meta keys found, skip this user
+            // If no matching meta keys found, skip this user.
             if ( empty( $properties ) ) {
-                return false;
+                return array(
+                    'status' => 'skipped'
+                );
             }
 
             $formatted_data = self::format_data_to_sync( $email, $properties );
 
-            // Debug Log
-            Klaviyo_WP_Meta_Sync_Admin_Log::debug_log( 
-                sprintf( "Syncing user ID %d with properties: %s", 
-                    $user_id, 
-                    json_encode( $formatted_data, JSON_PRETTY_PRINT ) 
-                ) 
+            $klaviyo = Klaviyo_WP_Meta_Sync_Admin_API_Handler::get_instance();
+
+            $response = $klaviyo->create_or_update_profile( $formatted_data );
+
+            if ( ! $response ) {
+                return array(
+                    'status' => 'failed'
+                );
+            }
+            return array(
+                'status' => 'completed',
             );
-
-            return true;
-
         }
 
 
@@ -271,16 +271,11 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
          */
         public static function add_sync_all_users_extra_tablenav( $which ) {        
             if ( 'top' === $which ) {
-
-                $scan_text   = __( 'Sync All Users', 'klaviyo-wp-meta-sync' );
-                $button_text = $scan_text;
-        
-                $logo_url     = '';	
-                $button_style = '';
+                $button_text = __( 'Klaviyo Sync All Users', 'klaviyo-wp-meta-sync' );
                 $nonce = wp_create_nonce( 'sync_all_users_nonce' );
         
                 echo '<div class="alignleft actions">';
-                echo '<input style="' . esc_attr( $button_style ) . '" type="submit" name="sync_all_users" class="button action" value="' . esc_attr( $button_text ) . '">';
+                echo '<input type="submit" name="sync_all_users" class="button action" value="' . esc_attr( $button_text ) . '">';
                 echo '<input type="hidden" name="_sync_all_users_nonce" value="' . esc_attr( $nonce ) . '">';
                 echo '</div>';
             }
@@ -311,13 +306,13 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
                 $users = $query->get_results();
 
                 $user_ids = wp_list_pluck( $users, 'ID' );
-        
+
                 // Redirect URL for the bulk action
                 $redirect_url = admin_url( 'users.php' );
-        
+
                 // Schedule posts for a scan and append query arg for bulk scans
                 $redirect_url = static::handle_bulk_action( $redirect_url, 'sync_to_klaviyo', $user_ids );
-        
+
                 // Safely redirect to the new URL
                 wp_safe_redirect( esc_url_raw( $redirect_url ) );
                 exit;
@@ -359,9 +354,8 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
          *
          * @return void
          */
-        public static function bulk_sync_progress_callback() {
-            //wp_send_json_success( 'hellp' );
-            //check_ajax_referer( 'bulk_sync_nonce', 'bulk_sync_nonce' );
+        public static function bulk_sync_progress_callback() {;
+            check_ajax_referer( 'bulk_sync_nonce', 'bulk_sync_nonce' );
 
             // Check if the user has the capability to manage options.
             if ( ! current_user_can( 'manage_options' ) ) {
@@ -376,6 +370,7 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
             }
 
             $completed_users = [];
+            $skipped_users = [];
             $failed_users = [];
             $processing_count = 0;
             $all_processed = true;
@@ -385,6 +380,11 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
                     $completed_users[] = [
                         'user_id'    => $user_id,
                         'sync_result' => '',
+                    ];
+                } elseif ( 'skipped' === $status ) {
+                    $skipped_users[] = [
+                        'user_id'    => $user_id,
+                        'error_message' => __( 'No matching meta keys found.', 'originality-ai' ),
                     ];
                 } elseif ( 'failed' === $status ) {
                     $failed_users[] = [
@@ -408,6 +408,7 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
             wp_send_json_success( [
                 'total_users'     => $total_users,
                 'completed_users' => $completed_users,
+                'skipped_users'   => $skipped_users,
                 'failed_users'    => $failed_users,
                 'remaining_users' => $remaining_users,
             ] );
@@ -417,7 +418,6 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
             self::$meta_data = array(
                 'isEmailVerified',
                 'completed_array_verification',
-                'first_name',
             );
         }
 

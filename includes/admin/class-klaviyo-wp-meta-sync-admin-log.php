@@ -47,7 +47,7 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Log' ) ) :
                 }
         
                 // Set the full path for the log file.
-                self::$file_path = trailingslashit( $log_dir ) . 'klaviyo-wp-meta-sync.log';
+                self::$file_path = trailingslashit( $log_dir ) . 'klaviyo-sync-errors.log';
             }
         }
 

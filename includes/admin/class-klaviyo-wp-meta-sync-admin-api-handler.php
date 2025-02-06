@@ -66,13 +66,13 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_API_Handler' ) ) :
          */
         public function create_or_update_profile( $profile_data ) {
             try {
-                return $this->klaviyo->Profiles->createOrUpdateProfile($profile_data);
+                return $this->klaviyo->Profiles->createOrUpdateProfile( $profile_data );
             } catch (Exception $e) {
-                // Extract error details
+                // Extract error details.
                 $error_code = $e->getCode();
                 $error_message = $e->getMessage();
-                $request_data = json_encode($profile_data, JSON_PRETTY_PRINT);
-                $user_email = isset($profile_data['data']['attributes']['email']) ? $profile_data['data']['attributes']['email'] : 'Unknown Email';
+                $request_data = json_encode( $profile_data, JSON_PRETTY_PRINT );
+                $user_email = isset( $profile_data['data']['attributes']['email']) ? $profile_data['data']['attributes']['email'] : 'Unknown Email';
 
                 // Create an informative log message.
                 $log_message = sprintf(
@@ -83,7 +83,7 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_API_Handler' ) ) :
                     $request_data
                 );
 
-                // Log the error
+                // Log the error.
                 Klaviyo_WP_Meta_Sync_Admin_Log::debug_log($log_message);
             
                 return false;
