@@ -13,9 +13,8 @@
 			$('#email_addresses').prop('disabled', ! $(this).is(':checked'));
 		});
 
-
 		const totalUsers = klaviyo_wp_meta_sync_params.totalUsers;
-		console.log(totalUsers);
+
 		if (totalUsers > 0) {
 			const interval = setInterval(() => {
 				$.ajax({
@@ -31,15 +30,16 @@
 						if (response.success) {
 							const { total_users, completed_users, skipped_users, failed_users, remaining_users } = response.data;
 
-							// Update the progress notice dynamically
+							// Update the progress notice dynamically.
 							let progressMessage = `
 								<div style="font-size: 14px; line-height: 1.6; margin-bottom: 10px;">
-									<strong style="color: green;">${completed_users.length}</strong> out of <strong>${total_users}</strong> users synced successfully.<br>
-									<strong style="color: yellow;">${skipped_users.length}</strong> users skipped - No matching meta keys found.<br>
-									<strong style="color: red;">${failed_users.length}</strong> users failed.<br>
-									<strong style="color: orange;">${remaining_users}</strong> users are still in progress.
+									✅ <strong style="color: green;">${completed_users.length}</strong> of <strong>${total_users}</strong> users successfully synced.<br>
+									⚠️ <strong style="color: orange;">${skipped_users.length}</strong> users skipped (No matching meta keys).<br>
+									❌ <strong style="color: red;">${failed_users.length}</strong> users failed to sync.<br>
+									⏳ <strong style="color: blue;">${remaining_users}</strong> users are still being processed.
 								</div>
 							`;
+
 							$('#bulk-sync-progress').html(progressMessage);
 
 							// Stop polling when all syncs are completed
@@ -48,10 +48,13 @@
 
 								let finalMessage = `
 									<div style="margin-top: 10px; font-size: 14px; line-height: 1.6;">
-										<strong style="color: green;">All sync completed successfully!</strong>
-										${failed_users.length > 0 ? `<br><strong style="color: red;">${failed_users.length} users failed. Check logs for details.</strong>` : ''}
+										🎉 <strong style="color: green;">Bulk Sync Completed!</strong><br>
+										${failed_users.length > 0 
+											? `⚠️ <strong style="color: red;">${failed_users.length} users failed. Check the logs for details.</strong>` 
+											: `✅ All users were successfully synced!`}
 									</div>
 								`;
+
 								$('#bulk-sync-progress').html(progressMessage + finalMessage);
 							}
 						} else {
@@ -64,17 +67,17 @@
 					error() {
 						// Stop polling and show an error message
 						clearInterval(interval);
-						$('#bulk-sync-progress').html('<strong>An error occurred while updating the sync progress. Please refresh the page to check the latest status.</strong>');
-						console.error('Failed to fetch bulk sync progress.');
+						$('#bulk-sync-progress').html('❌ <strong>Sync progress update failed. Refresh the page and check the logs for details.</strong>');
+						console.error('❌ Error: Failed to fetch bulk sync progress.');
+
 					},
 				});
 			}, 5000); // Poll every 5 seconds
 		} else {
-			// No users to scan
-			$('#bulk-sync-progress').html('<strong>No users to scan. Please initiate a new bulk sync.</strong>');
+			// No users to sync.
+			$('#bulk-sync-progress').html('ℹ️ <strong>No users available for sync. Start a new bulk sync if needed.</strong>');
 		}
 	});
-
 
 	/**
 	 * Hide/show the loader.

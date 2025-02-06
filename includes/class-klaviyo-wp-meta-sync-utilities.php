@@ -18,94 +18,83 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Utilities' ) ) {
 	 */
 	class Klaviyo_WP_Meta_Sync_Utilities {
 		/**
-		 * Register the loader image to the media library.
+		 * Send an email notification when a Klaviyo API error occurs.
 		 *
-		 * @param string $path The path to the image.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @return integer|boolean
-		 */
-		public static function register_loader_image( $path ) {
-			$upload_dir = wp_upload_dir();
-			$full_path  = trailingslashit( KLAVIYO_WP_META_SYNC_ROOT_PATH . '/assets/dist/images/' ) . $path;
-
-			// Ensure the file exists.
-			if ( ! file_exists( $full_path ) ) {
-				return false;
-			}
-
-			// Check file type.
-			$file_type = wp_check_filetype( basename( $full_path ) );
-
-			// Check if the image is already registered.
-			$args = array(
-				'post_type'      => 'attachment',
-				'post_status'    => 'inherit',
-				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-					array(
-						'key'     => '_klaviyo_loader',
-						'value'   => $path,
-						'compare' => '=',
-					),
-				),
-				'posts_per_page' => 1,
-			);
-
-			$query = new WP_Query( $args );
-			if ( $query->have_posts() ) {
-				return $query->posts[0]->ID;
-			}
-
-			// Copy the image to the uploads directory.
-			$destination_path = trailingslashit( $upload_dir['path'] ) . basename( $full_path );
-			if ( ! copy( $full_path, $destination_path ) ) {
-				return false;
-			}
-
-			// Create the attachment.
-			$attachment = array(
-				'guid'           => trailingslashit( $upload_dir['url'] ) . basename( $full_path ),
-				'post_mime_type' => $file_type['type'],
-				'post_title'     => sanitize_file_name( basename( $full_path ) ),
-				'post_status'    => 'inherit',
-			);
-
-			$attach_id = wp_insert_attachment( $attachment, $destination_path );
-			if ( ! is_wp_error( $attach_id ) ) {
-				require_once ABSPATH . 'wp-admin/includes/image.php';
-				wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $destination_path ) );
-				update_post_meta( $attach_id, '_klaviyo_loader', $path );
-				return $attach_id;
-			}
-
-			return false;
-		}
-
-		/**
-		 * Get the loader image HTML.
+		 * @param string $user_email The email of the user being synced.
+		 * @param int    $error_code The API error code.
+		 * @param string $error_message The API error message.
+		 * @param string $request_data The request data sent to Klaviyo.
 		 *
 		 * @since 1.0.0
-		 *
-		 * @return string
+		 * @return void
 		 */
-		public static function get_loader_image_html() {
-			$attachment_id = self::register_loader_image( 'loader.gif' );
+		public static function send_error_notification( $user_email, $error_code, $error_message, $request_data ) {
+			// Get settings.
+			$settings     = get_option( 'klaviyo_wp_meta_sync_settings', array() );
+			$enabled      = isset( $settings['email_notifications'] ) ? sanitize_text_field( $settings['email_notifications'] ) : '';
+			$admin_emails = isset( $settings['email_addresses'] ) ? sanitize_text_field( $settings['email_addresses'] ) : '';
 
-			if ( $attachment_id ) {
-				return wp_get_attachment_image(
-					$attachment_id,
-					array( 30, 30 ),
-					false,
-					array(
-						'class' => 'klaviyo_loader_margin',
-						'alt'   => __( 'Klaviyo WP Meta Sync loader', 'cklaviyo-wp-meta-sync' ),
-					)
-				);
+			// Exit if notifications are disabled or no admin emails provided.
+			if ( 'on' !== $enabled || empty( $admin_emails ) ) {
+				return;
 			}
 
-			// Fallback to the URL -- added an empty string for now.
-			return '';
+			// Convert comma-separated emails to an array.
+			$email_recipients = array_map( 'trim', explode( ',', $admin_emails ) );
+
+			// Validate email addresses.
+			$email_recipients = array_filter( $email_recipients, 'is_email' );
+
+			// If no valid email addresses, exit.
+			if ( empty( $email_recipients ) ) {
+				return;
+			}
+
+			// Get site name and admin email.
+			$site_name   = get_bloginfo( 'name' );
+			$admin_email = get_option( 'admin_email' );
+			if ( ! is_email( $admin_email ) ) {
+				$admin_email = 'no-reply@' . parse_url( get_site_url(), PHP_URL_HOST );
+			}
+
+			// Email subject.
+			$subject = sprintf( '⚠️ Klaviyo API Error - %s', $site_name );
+
+			// Email message in HTML format.
+			$message = sprintf(
+				'<h2>Klaviyo API Error</h2>
+				<p>An error occurred while syncing a user with Klaviyo.</p>
+				<hr>
+				<h3>Error Details:</h3>
+				<ul>
+					<li><strong>User Email:</strong> %s</li>
+					<li><strong>Error Code:</strong> %d</li>
+					<li><strong>Error Message:</strong> %s</li>
+				</ul>
+				<h3>Request Data:</h3>
+				<pre>%s</pre>
+				<hr>
+				<p>Please check the logs for more details.</p>
+				<p>Best Regards,</p>
+				<p><strong>%s</strong></p>',
+				esc_html( $user_email ),
+				intval( $error_code ),
+				esc_html( $error_message ),
+				esc_html( $request_data ),
+				esc_html( $site_name )
+			);
+
+			// Headers.
+			$headers = array(
+				'Content-Type: text/html; charset=UTF-8',
+				'From: ' . $site_name . ' <' . $admin_email . '>',
+			);
+
+			// Send the email.
+			if ( ! wp_mail( $email_recipients, $subject, $message, $headers ) ) {
+				// Log the error.
+				Klaviyo_WP_Meta_Sync_Admin_Log::debug_log( '[Klaviyo API Error] Email notification failed to send.' );
+			}
 		}
 	}
 }

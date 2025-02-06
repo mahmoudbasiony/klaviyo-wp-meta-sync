@@ -170,7 +170,7 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Settings' ) ) :
 		 */
 		public function settings_api_key() {
 			$api_key = isset( $this->settings['klaviyo_api_key'] ) ? esc_attr( $this->settings['klaviyo_api_key'] ) : '';
-			
+
 			include_once KLAVIYO_WP_META_SYNC_TEMPLATES_PATH . 'admin/views/sections/fields/api-key.php';
 		}
 

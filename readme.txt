@@ -1,5 +1,5 @@
 === WP-Klaviyo Sync ===
-Contributors: [Your Name]  
+Contributors: mahmoudbasiony 
 Tags: Klaviyo, WordPress, API, user meta, email marketing  
 Requires at least: 5.6  
 Tested up to: 6.4  
@@ -57,5 +57,5 @@ Initial release - syncs custom user meta fields from WordPress to Klaviyo.
  
 
 == Support ==  
-For support or feature requests, please contact **[Your Email/Website]**.  
+For support or feature requests, please contact **[m.basiony5@gmail.com]**.  
 

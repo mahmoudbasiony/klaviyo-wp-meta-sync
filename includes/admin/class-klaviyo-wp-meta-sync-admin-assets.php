@@ -71,8 +71,8 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Assets' ) ) :
 					'ajaxUrl'     => esc_url( admin_url( 'admin-ajax.php' ) ),
 					'nonce'       => wp_create_nonce( 'klaviyo_wp_meta_sync' ),
 					'syncPageUrl' => esc_url( admin_url( 'admin.php?page=klaviyo-wp-meta-sync&tab=sync' ) ),
-					'syncNonce' => wp_create_nonce( 'bulk_sync_nonce' ),
-					'totalUsers' => $total_users,
+					'syncNonce'   => wp_create_nonce( 'bulk_sync_nonce' ),
+					'totalUsers'  => $total_users,
 				)
 			);
 		}

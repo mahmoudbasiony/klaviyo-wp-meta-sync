@@ -109,11 +109,10 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync' ) ) :
 			/*
 			 * Global includes.
 			 */
-			include_once KLAVIYO_WP_META_SYNC_ROOT_PATH . '/includes/functions.php';
 			include_once KLAVIYO_WP_META_SYNC_ROOT_PATH . '/includes/class-klaviyo-wp-meta-sync-utilities.php';
-			include_once KLAVIYO_WP_META_SYNC_ROOT_PATH . '/includes/admin/class-klaviyo-wp-meta-sync-admin-usermeta.php';
-			include_once KLAVIYO_WP_META_SYNC_ROOT_PATH . '/includes/admin/class-klaviyo-wp-meta-sync-admin-log.php';
-			include_once KLAVIYO_WP_META_SYNC_ROOT_PATH . '/includes/admin/class-klaviyo-wp-meta-sync-admin-api-handler.php';
+			include_once KLAVIYO_WP_META_SYNC_ROOT_PATH . '/includes/class-klaviyo-wp-meta-sync-usermeta.php';
+			include_once KLAVIYO_WP_META_SYNC_ROOT_PATH . '/includes/class-klaviyo-wp-meta-sync-log.php';
+			include_once KLAVIYO_WP_META_SYNC_ROOT_PATH . '/includes/class-klaviyo-wp-meta-sync-api-handler.php';
 
 			/*
 			 * Back-end includes.
@@ -160,6 +159,7 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync' ) ) :
 		 * @return void
 		 */
 		public static function deactivate() {
+			// Nothing to do for now.
 		}
 
 		/**
