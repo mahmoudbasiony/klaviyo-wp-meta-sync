@@ -1,0 +1,398 @@
+# Copyright (C) 2025 Klaviyo_WP_Meta_Sync
+# This file is distributed under the same license as the Klaviyo_WP_Meta_Sync package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Klaviyo_WP_Meta_Sync\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-01-31 20:51+0000\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: klaviyo-wp-meta-sync.php:153
+msgid "Switch to Mahmoud Basiony Hosting for free"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-ajax.php:46, includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-ajax.php:91, includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-ajax.php:126, includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-export.php:60, includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:57, includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:398
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-export.php:65, includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-notices.php:139
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-export.php:95
+msgid "Error saving the CSV file."
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-export.php:102
+msgid "Error reading the CSV file."
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:213, includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:424, templates/admin/views/sections/fields/scope-of-scan.php:20
+msgid "Comments"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:240
+msgid "Link"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:241
+msgid "Status"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:242
+msgid "Response"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:243
+msgid "Source"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:244
+msgid "Post Type"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:245
+msgid "Date"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:282
+msgid "Data not available."
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:300, includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:326
+msgid "Edit"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:305
+msgid "View"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:331
+msgid "Find"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:338
+msgid "Mark as Broken"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:338
+msgid "Mark as Fixed"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:355, includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:416
+msgid "Fixed"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:382
+msgid "Code: "
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:409
+msgid "All Types"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:410
+msgid "Internal"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:411
+msgid "External"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:415
+msgid "All Statuses"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:417
+msgid "Broken"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:421
+msgid "All Locations"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:422, templates/admin/views/sections/fields/scope-of-scan.php:16
+msgid "Posts"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-links-list-table.php:423, templates/admin/views/sections/fields/scope-of-scan.php:18
+msgid "Pages"
+msgstr ""
+
+#. translators: 1) int version 2) int version
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-notices.php:104
+msgid "Klaviyo WP Meta Sync - The minimum PHP version required for this plugin is %1$s. You are running %2$s."
+msgstr ""
+
+#. translators: 1) int version 2) int version
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-notices.php:114
+msgid "Klaviyo WP Meta Sync - The minimum WordPress version required for this plugin is %1$s. You are running %2$s."
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-notices.php:134
+msgid "Action failed. Please refresh the page and retry."
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:58, includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:59
+msgid "Klaviyo WP Meta Sync"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:112
+msgid "Settings for the Klaviyo WP Meta Sync plugin."
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:121
+msgid "General"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:128, templates/admin/settings.php:24
+msgid "Scan"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:135
+msgid "Scan Frequency"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:143
+msgid "Email Notifications"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:151
+msgid "Email Address(es)"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:159
+msgid "Number of Links to Scan"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:167
+msgid "Set number of links"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:175
+msgid "Scope of Scan"
+msgstr ""
+
+#: includes/admin/class-wpcbl-klaviyo-wp-meta-sync-admin-settings.php:183
+msgid "Exclusions"
+msgstr ""
+
+#: includes/class-wpcbl-klaviyo-wp-meta-sync-schedule.php:62, templates/admin/views/sections/fields/scan-frequency.php:19
+msgid "Monthly"
+msgstr ""
+
+#: includes/class-wpcbl-klaviyo-wp-meta-sync-utilities.php:722
+msgid "Broken Links Found"
+msgstr ""
+
+#: includes/class-wpcbl-klaviyo-wp-meta-sync-utilities.php:725
+msgid "The following broken links were found today on"
+msgstr ""
+
+#: includes/class-wpcbl-klaviyo-wp-meta-sync-utilities.php:731
+msgid "URL:"
+msgstr ""
+
+#: includes/class-wpcbl-klaviyo-wp-meta-sync-utilities.php:731
+msgid "Status Code:"
+msgstr ""
+
+#: includes/class-wpcbl-klaviyo-wp-meta-sync-utilities.php:738
+msgid "Plugin"
+msgstr ""
+
+#: includes/class-wpcbl-klaviyo-wp-meta-sync-utilities.php:741
+msgid "To read more about WP Deadlinks checker plugin visit"
+msgstr ""
+
+#: includes/class-wpcbl-klaviyo-wp-meta-sync-utilities.php:742
+msgid "If you need any help, reach out to us at"
+msgstr ""
+
+#: includes/class-wpcbl-klaviyo-wp-meta-sync-utilities.php:748
+msgid "email could not be sent. Please check for issues with WP Mailer."
+msgstr ""
+
+#: includes/class-wpcbl-klaviyo-wp-meta-sync-utilities.php:837
+msgid "Check for broken links loader"
+msgstr ""
+
+#: includes/functions.php:92
+msgid "Author: "
+msgstr ""
+
+#: includes/functions.php:156
+msgid "Comment"
+msgstr ""
+
+#: templates/admin/settings-help.php:15
+msgid "Why is this plugin more advanced than typical broken link plugins?"
+msgstr ""
+
+#: templates/admin/settings-help.php:16
+msgid ""
+"Unlike standard broken link checkers that only scan posts and pages, this plugin goes deeper by analyzing all files, including images, media uploads, and hidden references in widgets, shortcodes, and theme files. It also detects filename inconsistencies, special character issues, and missing auto-generated image sizes, ensuring no broken assets are overlooked.\n"
+"\n"
+"			Why is this important?\n"
+"			Many broken link plugins only detect standard 404 errors in posts and pages, but missing images, incorrectly encoded filenames, and hidden links in widgets or themes can also impact your website. These issues can lead to **poor user experience, slower page load times, and SEO penalties** if search engines repeatedly find broken assets. By going deeper, this plugin helps you **identify and fix hidden problems** that other scanners might miss, ensuring your site remains fully functional and optimized.\n"
+"\n"
+"			What does the plugin check?\n"
+"			• URL links (internal & external)  \n"
+"			• File links (images, PDFs, CSS, JS)  \n"
+"			• Media library files  \n"
+"			• Theme & widget references  \n"
+"			• Shortcodes & dynamic content\n"
+"			• Encoded & special character filenames\n"
+"\n"
+"			🚀 This ensures your entire website remains free of broken assets, improving performance, SEO, and user experience."
+msgstr ""
+
+#: templates/admin/settings-help.php:35
+msgid "What is the Klaviyo WP Meta Sync plugin and how does it work?"
+msgstr ""
+
+#: templates/admin/settings-help.php:36
+msgid "The Klaviyo WP Meta Sync plugin is a tool designed for WordPress sites to identify and manage dead links (also known as broken links) across posts, pages, and comments. It automatically scans your website and reports any links that lead to non-existent or inaccessible pages, helping you maintain a cleaner and more user-friendly site."
+msgstr ""
+
+#: templates/admin/settings-help.php:39
+msgid "How can I check for broken links on my website?"
+msgstr ""
+
+#: templates/admin/settings-help.php:40
+msgid "Install the The Klaviyo WP Meta Sync plugin, run a scan, and view the results in the plugin dashboard. It’s quick, accurate, and designed specifically for WordPress."
+msgstr ""
+
+#: templates/admin/settings-help.php:43
+msgid "How often does the Klaviyo WP Meta Sync plugin scan my website for dead links?"
+msgstr ""
+
+#: templates/admin/settings-help.php:44
+msgid "You can configure the frequency of the scans according to your needs. The plugin allows you to set up automated scans on a daily, weekly, or monthly basis. Additionally, you can manually initiate a scan at any time if you suspect there are new dead links due to recent changes on your site or external websites."
+msgstr ""
+
+#: templates/admin/settings-help.php:47
+msgid "Can the Klaviyo WP Meta Sync plugin fix the dead links it finds?"
+msgstr ""
+
+#: templates/admin/settings-help.php:48
+msgid "While the Klaviyo WP Meta Sync plugin efficiently identifies dead links, it does not automatically fix them. It provides a comprehensive report including the location of each dead link, allowing you to decide the most appropriate action—whether to update, redirect, or remove the link."
+msgstr ""
+
+#: templates/admin/settings-help.php:51
+msgid "Is there a limit to the number of pages and comments the plugin can scan?"
+msgstr ""
+
+#: templates/admin/settings-help.php:52
+msgid "The plugin is designed to handle websites of various sizes, from small blogs to larger corporate sites. However, performance may vary based on your hosting environment and the total content volume. For very large sites, we recommend performing scans during low-traffic periods to minimize any potential impact on site performance."
+msgstr ""
+
+#: templates/admin/settings-help.php:55
+msgid "Will fixing broken links improve my SEO?"
+msgstr ""
+
+#: templates/admin/settings-help.php:56
+msgid "Yes, search engines prioritize websites with working links. Fixing broken links ensures better rankings and a smoother user experience."
+msgstr ""
+
+#: templates/admin/settings-help.php:59
+msgid "Is the plugin free?"
+msgstr ""
+
+#: templates/admin/settings-help.php:60
+msgid "Yes, the plugin is 100% free to use."
+msgstr ""
+
+#: templates/admin/settings-help.php:69
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#. translators: %s is the URL to the plugin site.
+#: templates/admin/settings-help.php:89
+msgid "To read more about WP Deadlinks checker plugin visit our <a href=\"%s\" target=\"_blank\">plugin site</a>."
+msgstr ""
+
+#. translators: %s is the URL to the support page.
+#: templates/admin/settings-help.php:109
+msgid "If you need any help, reach out to us at <a href=\"%s\" target=\"_blank\">support</a>."
+msgstr ""
+
+#: templates/admin/settings-scan.php:22
+msgid "Perform a scan for broken links on your WordPress site."
+msgstr ""
+
+#: templates/admin/settings-scan.php:23
+msgid "Detect broken links, broken images, embed Youtube videos by simply clicking on the scan button."
+msgstr ""
+
+#: templates/admin/settings-scan.php:27
+msgid "Start Manual Scan"
+msgstr ""
+
+#: templates/admin/settings.php:23
+msgid "Settings"
+msgstr ""
+
+#: templates/admin/settings.php:25
+msgid "Help"
+msgstr ""
+
+#: templates/admin/views/export-csv.php:21
+msgid "Export Report in CSV"
+msgstr ""
+
+#: templates/admin/views/loader.php:18
+msgid "Scanning your site for dead links... Please hold on, this might take a few moments."
+msgstr ""
+
+#: templates/admin/views/loader.php:20
+msgid "Please do not close this page."
+msgstr ""
+
+#: templates/admin/views/no-broken-links.php:18
+msgid "Congratulations, no dead links found!"
+msgstr ""
+
+#. translators: %s: total number of links
+#: templates/admin/views/no-broken-links.php:22
+msgid "We scanned a total of %s links on your site. All clear!"
+msgstr ""
+
+#: templates/admin/views/sections/fields/email-addresses.php:17
+msgid "Enter email addresses, separated by commas."
+msgstr ""
+
+#: templates/admin/views/sections/fields/email-notifications.php:16
+msgid "Enable email notifications"
+msgstr ""
+
+#: templates/admin/views/sections/fields/exclusion-urls.php:25
+msgid "Enter URLs to exclude from scan, one per line. Leave empty if none."
+msgstr ""
+
+#: templates/admin/views/sections/fields/number-of-links.php:16, templates/admin/views/sections/fields/scope-of-scan.php:22
+msgid "All"
+msgstr ""
+
+#: templates/admin/views/sections/fields/number-of-links.php:18
+msgid "Set number"
+msgstr ""
+
+#: templates/admin/views/sections/fields/scan-frequency.php:16
+msgid "Never"
+msgstr ""
+
+#: templates/admin/views/sections/fields/scan-frequency.php:17
+msgid "Daily"
+msgstr ""
+
+#: templates/admin/views/sections/fields/scan-frequency.php:18
+msgid "Weekly"
+msgstr ""

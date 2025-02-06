@@ -1,0 +1,8 @@
+/node_modules
+/vendor
+
+languages/klaviyo-wp-meta-sync.pot
+package-lock.json
+composer.lock
+.DS_Store
+klaviyo-wp-meta-sync.zip
