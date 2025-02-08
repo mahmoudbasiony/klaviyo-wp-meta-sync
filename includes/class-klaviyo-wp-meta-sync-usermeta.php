@@ -159,8 +159,24 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_Usermeta' ) ) :
 					update_user_meta( $user_id, '_klaviyo_sync_batch', $batch_id );
 				}
 
-				// Schedule the batch event.
-				wp_schedule_single_event( time() + ( $batch_index * 60 ), 'klaviyo_sync_batch_event', array( $batch_id ) );
+				// Schedule the batch event if it’s not already scheduled.
+				if ( ! wp_next_scheduled( 'klaviyo_sync_batch_event', array( $batch_id ) ) ) {
+					$scheduled_time = time() + ( $batch_index * 60 );
+					wp_schedule_single_event( $scheduled_time, 'klaviyo_sync_batch_event', array( $batch_id ) );
+				}
+			}
+
+			// Manually trigger WP-Cron to ensure the event runs, even if WP Cron is disabled.
+			$cron_url = site_url( '/wp-cron.php?doing_wp_cron' );
+
+			$response = wp_remote_post( esc_url( $cron_url ), array(
+				'timeout'   => 0.01, // Prevent waiting for a response.
+				'blocking'  => false,
+				'sslverify' => false
+			));
+		
+			if ( is_wp_error( $response ) ) {
+				Klaviyo_WP_Meta_Sync_Admin_Log::debug_log( "Failed to trigger WP-Cron: " . $response->get_error_message() );
 			}
 
 			// Generate the nonce.

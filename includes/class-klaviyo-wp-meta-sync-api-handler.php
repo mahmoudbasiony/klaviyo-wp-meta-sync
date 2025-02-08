@@ -54,7 +54,6 @@ if ( ! class_exists( 'Klaviyo_WP_Meta_Sync_Admin_API_Handler' ) ) :
 				num_retries: 3,
 				guzzle_options: array(
 					'timeout' => 10,
-					//'verify' => 'C:\MAMP\bin\php\cacert.pem'
 				),
 				user_agent_suffix: '/Klaviyo_WP_Meta_Sync'
 			);

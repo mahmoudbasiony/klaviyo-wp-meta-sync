@@ -133,8 +133,6 @@ gulp.task( 'makePluginFile', () => {
         '**/*',
         '!node_modules/',
         '!node_modules/**',
-        '!vendor/',
-        '!vendor/**',
         '!.git/**',
         '!assets/src/',
         '!assets/src/**',

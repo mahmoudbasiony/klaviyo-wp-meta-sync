@@ -26,7 +26,6 @@
 						bulk_sync_nonce: klaviyo_wp_meta_sync_params.syncNonce,
 					},
 					success(response) {
-						console.log(response);
 						if (response.success) {
 							const { total_users, completed_users, skipped_users, failed_users, remaining_users } = response.data;
 
@@ -58,7 +57,6 @@
 								$('#bulk-sync-progress').html(progressMessage + finalMessage);
 							}
 						} else {
-							console.log('All syncs completed or no users left to process.');
 							// Stop polling and update notice for no users in progress
 							clearInterval(interval);
 							$('#bulk-sync-progress').html('<strong>All syncs completed or no users left to process.</strong>');

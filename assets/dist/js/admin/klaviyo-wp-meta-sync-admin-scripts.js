@@ -15,6 +15,7 @@
       $('#email_addresses').prop('disabled', !$(this).is(':checked'));
     });
     const totalUsers = klaviyo_wp_meta_sync_params.totalUsers;
+    console.log(totalUsers);
     if (totalUsers > 0) {
       const interval = setInterval(() => {
         $.ajax({
